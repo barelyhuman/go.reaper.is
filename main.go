@@ -100,6 +100,6 @@ func constructImportContent(cfg Config, pkgName string, repoUrl string) string {
 
 func urlWithProto(urlString string) string {
 	parsed, _ := url.Parse(urlString)
-	parsed.Scheme = "http"
+	parsed.Scheme = "https"
 	return parsed.String()
 }
