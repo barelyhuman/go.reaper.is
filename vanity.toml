@@ -1,0 +1,9 @@
+[godoc]
+host = "pkg.go.dev"
+
+[server]
+url = "go.reaper.is"
+
+[package.pages]
+repo = "github.com/barelyhuman/pages"
+description = "A simple self hosted static pages implementation"
