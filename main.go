@@ -60,11 +60,12 @@ func main() {
 			log.Fatalf("Failed to write file %v with error %v", fileName, err)
 		}
 		defer fd.Close()
+		repoUrlwithProto := urlWithProto(packageDetails.Repo)
 		templ.Execute(
 			fd, VanityData{
-				GoImportContent:  constructImportContent(cfg, pkgName, packageDetails.Repo),
+				GoImportContent:  constructImportContent(cfg, pkgName, repoUrlwithProto),
 				GoRefreshContent: constructRefreshContent(cfg, pkgName),
-				RepoLink:         packageDetails.Repo,
+				RepoLink:         repoUrlwithProto,
 			},
 		)
 	}
@@ -95,4 +96,10 @@ func constructImportContent(cfg Config, pkgName string, repoUrl string) string {
 	sb.WriteString(" git ")
 	sb.WriteString(repoUrl)
 	return sb.String()
+}
+
+func urlWithProto(urlString string) string {
+	parsed, _ := url.Parse(urlString)
+	parsed.Scheme = "http"
+	return parsed.String()
 }
